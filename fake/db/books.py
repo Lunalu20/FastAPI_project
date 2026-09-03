@@ -52,3 +52,21 @@ fake_books_bd_table = [
         count_page = 340
     ),
 ]
+
+fake_users_db = {
+    "johndoe": {
+        "username": "johndoe",
+        "full_name": "John Doe",
+        "email": "johndoe@example.com",
+        "hashed_password": "$argon2id$v=19$m=65536,t=3,p=4$iVR61sr0mVZ+4ikCBL60HQ$YzVLrROJOWX19ND0PnKKRF13W/b8dqcKxDNHE2MPAHU",
+        "admin": True,
+        "disabled": False,
+    },
+    "alice": {
+        "username": "alice",
+        "full_name": "Alice Wonderson",
+        "email": "alice@example.com",
+        "hashed_password": "fakehashedsecret2",
+        "disabled": True,
+    },
+}

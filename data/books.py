@@ -2,7 +2,6 @@ from model.books import Book
 from typing import List
 from sqlalchemy import text
 
-
 DB_INIT_SCHEMA_NAME = 'public'
 DB_INIT_TABLE_NAME = 'books'
 MAIN_COL = 'id'
@@ -22,7 +21,8 @@ init_books_query = f"""
     
 def get_all(db_session)->List[Book]:
     """получаем все книги"""
-    query = """
+    
+    query = f"""
     SELECT id, name, author, genre, language, year, price_in_ru, count_page
     FROM {DB_INIT_SCHEMA_NAME}.{DB_INIT_TABLE_NAME};
     """
@@ -38,13 +38,13 @@ def get_all(db_session)->List[Book]:
     return validates_books
         
         
-def get_one(res_json, db_session):
+def get_one(id_book, db_session):
     """получаем конкретную книгу"""
     
     query = f"""
         SELECT id, name, author, genre, language, year, price_in_ru, count_page
         FROM {DB_INIT_SCHEMA_NAME}.{DB_INIT_TABLE_NAME}
-        WHERE id = {id}
+        WHERE id = {id_book}
     """
     
     res = db_session.execute(text(query))
@@ -84,7 +84,6 @@ def update(id_book:int, book:dict, db_session):
         if key != MAIN_COL:
             update_json += f"{key} = '{book[key]}', "
     update_json = update_json[:-2]
-    print(update_json)
             
     query = f"""
         UPDATE {DB_INIT_SCHEMA_NAME}.{DB_INIT_TABLE_NAME}
@@ -125,7 +124,6 @@ def delete(db_session, id_book:int):
     res = db_session.execute(text(query))
     
     all_books = res.all()
-    print(f'мы тут {all_books}')
     
     if not all_books:
         return False

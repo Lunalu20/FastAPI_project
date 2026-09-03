@@ -34,7 +34,6 @@ def change_one(id_book):
 def patch_one(db_session, book, id_book):
     update_validated = book.dict()
     update_bd = books.patch(id_book, update_validated, db_session)
-    print("я тут")
     return update_bd
 
 
